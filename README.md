@@ -1,66 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyek Akhir Basdat (WIP)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Persiapan 
 
-## About Laravel
+Panduan ini menjelaskan tentang persiapan development environment menggungakan Nix Shell. Pastikan menggunakan Linux atau WSL.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Instalasi Nix Package Manager:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```bash
+# Linux
+sh <(curl -L https://nixos.org/nix/install) --daemon
+# WSL
+sh <(curl -L https://nixos.org/nix/install) --no-daemon
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Selanjutnya clone repo ini dan masuk ke folder yang telah dibuat
 
-## Learning Laravel
+```bash
+git clone git@github.com:izzudd/tugas-akhir-pemweb.git
+cd tugas-akhir-pemweb
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Jalankan perintah berikut untuk menginisialisasi development environment
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+nix-shell
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Selanjutnya silahkan tunggu sebentar sambil ngopi, karena nix perlu mengunduh paket yang diperlukan. Untuk memastikan development environment sudah benar jalankan perintah di bawah ini:
 
-## Laravel Sponsors
+```bash
+echo $IN_NIX_SHELL 
+# output: impure
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Terakhir jalankan perintah di bawah ini untuk menginstall paket paket yang diperlukan
 
-### Premium Partners
+```bash
+composer install
+yarn install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Untuk masuk ke VSCode dengan Nix Shell pastikan variabel `$IN_NIX_SHELL` bernilai `impure` lalu ketik perintah berikut:
 
-## Contributing
+```bash
+code .
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Jika `$IN_NIX_SHELL` tidak bernilai `impure` jalankan lagi perintah `nix-shell` lalu jalankan perintah di atas.
 
-## Code of Conduct
+Sebelum menjalankan server, jangan lupa untuk meng-copy file `.env.example` dan mengubah namanya menjadi `.env`. Perhatian! Jangan hapus file `.env.example`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Panduan untuk Back End (WIP)
 
-## Security Vulnerabilities
+Untuk memulai development silahkan jalankan perintah berikut:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+yarn build
+php artisan serve
+```
 
-## License
+Server akan dimulai pada port 8000
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Data yang tertampil merupakan data yang berasal dari file `app/Http/Controllers/ViewController.php`. Untuk daftar route view dapat dilihat pada `routes/web.php`. Data ini sementara merupakan data dummy, selanjutnya perlu dilakukan fetching dari database agar data bisa dinamis. Diharap membuat Controller dan Model baru untuk penanganan data. Silahkan baca dokumentasi laravel untuk informasi lebih lanjut.
+
+- [https://laravel.com/docs/10.x/controllers](https://laravel.com/docs/10.x/controllers)
+- [https://laravel.com/docs/10.x/database](https://laravel.com/docs/10.x/database)
+
+## Panduan untuk Front End (WIP)
+
+Front end memerlukan 2 terminal untuk melakukan development. Satu untuk menjalankan server php, dan lainnya untuk menjalankan vite.
+
+```bash
+php artisan serve # jalankan di terminal 1
+yarn dev # jalankan di terminal 2
+```
+
+Server akan dimulai pada port 8000
+
+Pastikan buka terminal 2 (vite) untuk melihat status build dan debug log.
+
+Kode react dapat diakses pada folder `resource/js`. Pada folder ini terdapat beberapa folder lainnya yaitu:
+
+- `pages`: berisi semua page yang akan dirender oleh controller
+- `components`: berisi komponen yang dapat diimport ke file lainnya
+- `layout.jsx`: file layout global (diterapkan pada semua route)
+- `app.jsx`: file endpoint untuk proses rendering (jangan disentuh)
+
+Kode css dapat ditambahkan pada folder `resource/css`. Jika diperlukan dapat dilakukan instalasi css framework dan preprocessor.
+
+File pada `resources/view/app.blade.php` merupakan file endpoint html statis yang akan dirujuk oleh router untuk merender react.
