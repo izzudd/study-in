@@ -15,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ViewController::class, 'front']);
+
+Route::inertia('/login', 'Login');
+Route::inertia('/register', 'Register');
+
 Route::get('/{slug}', [ViewController::class, 'course']);
 Route::get('/{course}/{slug}', [ViewController::class, 'material']);

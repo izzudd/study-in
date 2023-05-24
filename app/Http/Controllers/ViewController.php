@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Psr7\Request;
 use Inertia\Inertia;
 
 class ViewController extends Controller {
@@ -17,7 +16,7 @@ class ViewController extends Controller {
             ];
         }
 
-        return Inertia::render('index', [
+        return Inertia::render('Index', [
             'courses' => $courses,
         ]);
     }
@@ -40,7 +39,7 @@ class ViewController extends Controller {
             'materials' => $materials,
         ];
 
-        return Inertia::render('course', [
+        return Inertia::render('Course', [
             'course' => $course,
         ]);
     }
@@ -53,7 +52,7 @@ class ViewController extends Controller {
             'completed' => false,
         ];
 
-        return Inertia::render('material', [
+        return Inertia::render('Material', [
             'material' => $material,
         ]);
     }
