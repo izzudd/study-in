@@ -1,6 +1,6 @@
 import NavBar from '../components/NavBar';
 
-export default function index({ courses }) {
+export default function Index({ courses }) {
   return (
     <div>
       <NavBar />

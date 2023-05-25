@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* tailwind custom bundle style */
+@layer components {
+    .btn-input {
+      @apply border border-on-primary px-4 rounded-lg py-[15px] duration-300 w-[100%];
+    };
+
+    /* .btn {
+        @apply 
+    } */
+}
