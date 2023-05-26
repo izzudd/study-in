@@ -20,6 +20,8 @@ Route::post('/course/{id}', [ViewController::class, 'addCourse'])->middleware(['
 Route::get('/course/{id}/{materialId}', [ViewController::class, 'material'])->middleware(['auth:sanctum']);
 Route::get('/search/{key}', [ViewController::class, 'search'])->middleware(['auth:sanctum']);
 Route::get('/profile', [ViewController::class, 'profile'])->middleware(['auth:sanctum']);
+Route::post('/profile', [ViewController::class, 'updateUserData'])->middleware(['auth:sanctum']);
+
 // Route::view()
 Route::get('/signup', [ViewController::class, 'signupCreate']);
 Route::post('/signup', [ViewController::class, 'signupStore']);

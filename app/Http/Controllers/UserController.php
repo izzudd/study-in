@@ -80,4 +80,33 @@ class UserController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
     }
+
+    public function updateData($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'username'     => 'required',
+            'fullName'    => 'required',
+        ],
+            [
+                'username.required' => 'Masukkan username',
+                'fullName.required' => 'Masukkan full name',
+            ]
+        );
+
+        $user=self::getUser();
+        if($validator->fails()) {
+            return array(false,"Silahkan Isi Data Yang Kosong");
+        } else {
+            try {
+                $user = User::where('id',$user['id'])->update([
+                    'username'     => $request->input('username'),
+                    'full_name'     => $request->input('fullName')
+                ]);
+
+                return array(true,"Update data user Berhasil !!!");
+            } catch (\Illuminate\Database\QueryException $exception) {
+                return array(false,"Update data user Gagal, Username telah digunakan");
+            }
+        }
+    }
 }

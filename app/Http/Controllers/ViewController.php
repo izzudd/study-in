@@ -115,4 +115,16 @@ class ViewController extends Controller {
             'courses' => $user,
         ]);
     }
+
+    public function updateUserData(Request $request)
+    {
+        $response=(new UserController())->updateData($request);
+        return response()->json([
+            'isSuccess' => $response[0],
+            'message' => $response[1],
+        ], 200);
+        // return Inertia::render('index', [
+        //     'courses' => $response,
+        // ]);
+    }
 }
