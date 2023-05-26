@@ -15,6 +15,7 @@ createInertiaApp({
     createRoot(el).render(
       <Layout>
         <App {...props} />
+        
       </Layout>
     )
   },
