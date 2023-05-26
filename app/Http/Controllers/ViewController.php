@@ -93,4 +93,18 @@ class ViewController extends Controller {
     {
         (new CourseTakenController())->addCourse($request);
     }
+
+    public function search(string $key)
+    {
+        $courses = (new CourseController())->getAllCourses($key,2);
+        foreach ($courses as $value) {
+            $value['students']=(new CourseTakenController())->getCourseStudents($value['id']);
+            $finishedMaterial=(new FinishedMaterialController())->countFinishedmaterials($value['id']);
+            $value['material']=$finishedMaterial[0];
+            $value['progress']=$finishedMaterial[1];
+        }
+        return Inertia::render('index', [
+            'courses' => $courses,
+        ]);
+    }
 }
