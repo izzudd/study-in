@@ -13,7 +13,8 @@ export default {
         'prim-container':'#4F378B',
         'on-prim-container':'#EADDFF',
         'secondary':'#CCC2DC',
-        'on-secondary':'#332D41'
+        'on-secondary':'#332D41',
+        'sec-container':'#4A4458'
       }
     },
   },

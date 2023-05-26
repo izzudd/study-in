@@ -24,12 +24,12 @@ export default function Register() {
           />
         </div>
         <div className="pass mt-3 btn-input">
-          <input onClick={()=>setSeen(!seen)} type={seen === false? 'password':'text'} className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required maxLength={8} placeholder='Password'
+          <input type={seen === false? 'password':'text'} className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required maxLength={8} placeholder='Password'
           onChange={e=>setPassword(e.target.value)}
           />
           <i onClick={()=>setSeen(!seen)} className= {`${seen===false?'fa-regular fa-eye-slash':'fa-regular fa-eye'} hover:cursor-pointer`}></i>
         </div>
-        <div className="keep flex gap-2 self-start items-center mt-4 mb-12">
+        <div className="keep flex gap-2 self-start items-center mt-4 mb-9">
           <input type="radio"/>
           <p>Keep me signed in</p>
         </div>

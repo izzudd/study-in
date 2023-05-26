@@ -19,7 +19,7 @@ export default function Login() {
           />
         </div>
         <div className="pass mt-3 btn-input">
-          <input onClick={()=>setSeen(!seen)} type={seen === false? 'password':'text'} className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required maxLength={8} placeholder='Password'
+          <input type={seen === false? 'password':'text'} className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required maxLength={8} placeholder='Password'
           onChange={e=>setPassword(e.target.value)}
           />
           <i onClick={()=>setSeen(!seen)} className= {`${seen===false?'fa-regular fa-eye-slash':'fa-regular fa-eye'} hover:cursor-pointer`}></i>
@@ -29,7 +29,7 @@ export default function Login() {
           <p>Keep me signed in</p>
         </div>
         <button className="btn w-[60%] justify-self-end">LOGIN</button>
-        <p className="">Dont have an account? <Link href="/register">Sign up</Link></p>
+        <p className="">Dont have an account? <Link href="/register" className="font-bold">Sign up</Link></p>
       </form>
     </div>
   )
