@@ -15,10 +15,12 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'username'     => 'required',
+            'fullName'    => 'required',
             'password'   => 'required',
         ],
             [
                 'username.required' => 'Masukkan username',
+                'fullName.required' => 'Masukkan full name',
                 'password.required' => 'Masukkan password',
             ]
         );
@@ -29,11 +31,12 @@ class UserController extends Controller
             try {
                 $user = User::create([
                     'username'     => $request->input('username'),
+                    'full_name'     => $request->input('fullName'),
                     'password'   => Hash::make($request->input('password'))
                 ]);
                 return array(true,"Registrasi Berhasil !!!");
             } catch (\Illuminate\Database\QueryException $exception) {
-                return array(true,"Registrasi Gagal, Username telah digunakan");
+                return array(false,"Registrasi Gagal, Username telah digunakan");
             }
         }
     }

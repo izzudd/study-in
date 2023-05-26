@@ -107,4 +107,12 @@ class ViewController extends Controller {
             'courses' => $courses,
         ]);
     }
+
+    public function profile()
+    {
+        $user=(new UserController())->getUser();
+        return Inertia::render('index', [
+            'courses' => $user,
+        ]);
+    }
 }
