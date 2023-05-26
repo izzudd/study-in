@@ -15,7 +15,8 @@ export default {
         'secondary': '#CCC2DC',
         'on-secondary': '#332D41',
         'secondary-container': '#4A4458',
-        'on-secondary-container': '#E8DEF8',
+        'on-secondary-container': '#E8DEF8',,
+        'sec-container':'#4A4458'
       }
     },
   },
