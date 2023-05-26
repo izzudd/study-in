@@ -1,6 +1,8 @@
 import { Link } from "@inertiajs/react";
-import MaterialList from "../components/MaterialList/MaterialList";
+import MaterialList from "../components/material-list/MaterialList";
 import Beardcrumbs from "../components/Beardcrumbs";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 export default function Material({ material }) {
   let materialList = [
@@ -14,6 +16,7 @@ export default function Material({ material }) {
 
   return (
     <div>
+      <NavBar login={true} />
       <header className="bg-on-secondary py-4 mb-8">
         <div className="container mx-auto">
           <Beardcrumbs items={beardcrumb} />
@@ -27,7 +30,7 @@ export default function Material({ material }) {
         </div>
       </header>
 
-      <div className="container mx-auto grid grid-cols-12 gap-4">
+      <div className="container mx-auto grid grid-cols-12 gap-4 mb-8">
         <div className="col-span-3">
           <aside className="p-4 bg-on-secondary rounded-xl">
             <div className="text-2xl font-bold mb-4">Course</div>
@@ -43,11 +46,12 @@ export default function Material({ material }) {
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt officia sed natus ipsam nam, soluta dolorem atque quam nulla eveniet illum dicta. Excepturi sit soluta dolor officiis nulla amet quo!</p>
           </div>
           <nav className="bg-on-secondary rounded-xl p-4 flex justify-between">
-            <Link className="btn-primary">HOME</Link>
-            <Link className="btn-primary">NEXT</Link>
+            <Link className="btn-primary"><i className="fa-solid fa-arrow-left mr-2"></i> HOME</Link>
+            <Link className="btn-primary">NEXT <i className="fa-solid fa-arrow-right ml-2"></i></Link>
           </nav>
         </article>
       </div>
+      <Footer />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-export default function course({ course }) {
+export default function NavBar() {
   return (
     <div className="h-[72px] py-3 px-[100px] bg-on-primary flex items-center justify-between">
       <img src="/assets/images/Logo.png" alt="" />
