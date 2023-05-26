@@ -5,12 +5,12 @@ const Progress = () => {
             <p className="w-[40%]">Sepertinya kamu belum mulai menyelesaikan topik pada learning path ini,
                 ayo mulai mengerjakan dan pantau progres kamu disini.</p>
             <div className="progress w-1/2 grid grid-cols-2 items-center gap-10">
-                <div class=" bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 w-[190%]">
-                    <div class="bg-primary h-2.5 rounded-full" style={{width: "90%"}}></div>
+                <div className=" bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 w-[190%]">
+                    <div className="bg-primary h-2.5 rounded-full" style={{width: "90%"}}></div>
                 </div>
                 <p className="w-fit justify-self-end">90%</p>
             </div>
-            <button className="btn self-start bg-sec-container">Download Sertifikat</button>
+            <button className="btn self-start opacity-40">Download Sertifikat</button>
         </div>
     );
 }

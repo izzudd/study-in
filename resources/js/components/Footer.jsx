@@ -7,10 +7,10 @@ const Footer = () => {
             Copyright 1999-2023 by Refsnes Data. All Rights Reserved.
             </p>
             <div className="social-media flex gap-4 text-lg">
-                <i class="fa-brands fa-square-facebook"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-linkedin"></i>
-                <i class="fa-brands fa-discord"></i>
+                <i className="fa-brands fa-square-facebook"></i>
+                <i className="fa-brands fa-instagram"></i>
+                <i className="fa-brands fa-linkedin"></i>
+                <i className="fa-brands fa-discord"></i>
             </div>
         </footer>
     );

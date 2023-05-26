@@ -13,7 +13,7 @@ export default function Beardcrumbs({ items }) {
   return (
     <ul className="beardcrumbs">
       {items.map(item => 
-        <li>{ item }</li>
+        <li key={item}>{ item }</li>
       )}
     </ul>
   )

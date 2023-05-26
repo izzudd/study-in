@@ -20,16 +20,16 @@ const DashCard = () => {
             <div className="word">
                 <p className="mt- text-3xl font-bold self-center">C++</p>
                 <div className="account flex items-center gap-4">
-                    <i class="fa-solid fa-user"></i>
+                    <i className="fa-solid fa-user"></i>
                     <p>14.531</p>
                 </div>
                 <div className="topic flex items-center gap-4">
-                    <i class="fa-regular fa-folder"></i>
+                    <i className="fa-regular fa-folder"></i>
                     <p>10 Topik | 98 Materi</p>
                 </div>
                 <div className="progress w-full grid grid-cols-2 items-center gap-10">
-                    <div class=" bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 w-[190%]">
-                        <div class="bg-primary h-2.5 rounded-full" style={{width: "45%"}}></div>
+                    <div className=" bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 w-[190%]">
+                        <div className="bg-primary h-2.5 rounded-full" style={{width: "45%"}}></div>
                     </div>
                     <p className="w-fit justify-self-end">90%</p>
                 </div>

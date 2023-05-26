@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/react"
 export default function course({ isLogin }) {
   return (
     <div className="h-[72px] py-3 px-[100px] bg-on-primary flex items-center justify-between">
-      <img src="/assets/images/Logo.png" alt="" />
+      <Link href="/"><img src="/assets/images/Logo.png" alt="" /></Link>
       {isLogin && 
       (<div className="nav text-on-background flex gap-6 items-center font-semibold">
           <p>Home</p>
