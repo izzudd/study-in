@@ -5,7 +5,7 @@ export default function Login() {
     const [seen,setSeen] = useState(false);
     const [password,setPassword] = useState();
   return (
-    <div className="bg-background h-screen relative text-on-primary flex items-center justify-between px-[5vw]">
+    <div className="bg-background h-screen relative text-on-primary flex items-center justify-between container mx-auto px-[5vw]">
       <img src="/assets/images/purpleWave.svg" alt="" className="absolute top-0 right-0 max-h-screen" />
       <section className="login-img h-[80%] w-[60%] z-10 flex flex-col items-center justify-between">
         <img src="/assets/images/Logo.png" className="self-start" alt="" />
@@ -28,7 +28,7 @@ export default function Login() {
           <input type="radio"/>
           <p>Keep me signed in</p>
         </div>
-        <button className="btn bg-primary font-semibold px-4 w-[60%] py-[10px] rounded-lg justify-self-end">LOGIN</button>
+        <button className="btn w-[60%] justify-self-end">LOGIN</button>
         <p className="">Dont have an account? <Link href="/register">Sign up</Link></p>
       </form>
     </div>

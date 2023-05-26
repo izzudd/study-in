@@ -33,7 +33,7 @@ export default function Register() {
           <input type="radio"/>
           <p>Keep me signed in</p>
         </div>
-        <button className="btn bg-primary font-semibold px-4 w-[60%] py-[10px] rounded-lg justify-self-end">SIGN UP</button>
+        <button className="btn w-[60%] justify-self-end">SIGN UP</button>
         <p className="">Already have an account? <Link className="font-bold" href="/login">Login</Link></p>
       </form>
     </div>

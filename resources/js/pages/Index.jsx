@@ -1,10 +1,15 @@
 import NavBar from '../components/NavBar';
+import Hero from '../components/index/Hero'
+import Path from '../components/index/Path'
+import Footer from '../components/Footer'
 
 export default function Index({ courses }) {
   return (
     <div>
       <NavBar />
-      <pre className='bg-black text-white'>courses: { JSON.stringify(courses, null, 4) }</pre>
+      <Hero/>
+      <Path/>
+      <Footer/>
     </div>
   )
 }
