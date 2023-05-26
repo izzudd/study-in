@@ -2,6 +2,7 @@ import './bootstrap';
 
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
+import { router } from '@inertiajs/react';
 
 createInertiaApp({
   resolve: name => {
@@ -11,7 +12,10 @@ createInertiaApp({
 
   setup({ el, App, props }) {
     createRoot(el).render(
-      <App {...props} />
+      <div>
+        <button onClick={() => router.post('logout')}>logout</button>
+        <App {...props} />
+      </div>
     )
   },
 })

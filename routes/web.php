@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViewController;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ViewController::class, 'front']);
+Route::get('/', [ViewController::class, 'front'])->name('front');
 
-Route::inertia('/login', 'Login');
-Route::inertia('/register', 'Register');
-Route::inertia('/dashboard', 'Dashboard');
+Route::post('/login', [AuthController::class, 'login']);
+Route::inertia('/login', 'Login')->name('login');
+Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::get('/{slug}', [ViewController::class, 'course']);
-Route::get('/{course}/{slug}', [ViewController::class, 'material']);
+Route::post('/register', [UserController::class, 'store']);
+Route::inertia('/register', 'Register')->name('register')->name('register');
+
+Route::middleware(Authenticate::class)->group(function() {
+  Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
+  Route::get('/{slug}', [ViewController::class, 'course'])->name('course');
+  Route::get('/{course}/{slug}', [ViewController::class, 'material'])->name('material');
+});
