@@ -1,4 +1,6 @@
 import { Link } from "@inertiajs/react";
+import MaterialList from "../components/MaterialList/MaterialList";
+import Beardcrumbs from "../components/Beardcrumbs";
 
 export default function Material({ material }) {
   let materialList = [
@@ -6,7 +8,7 @@ export default function Material({ material }) {
     ['C++ Function Parameters', false],
     ['C++ Function Overloading', true],
     ['C++ Function Recursion', false]
-  ];
+  ].map(material => ({title: material[0], done: material[1]}));
 
   let beardcrumb = ['Home', 'C++', 'C++ Function'];
 
@@ -14,11 +16,7 @@ export default function Material({ material }) {
     <div>
       <header className="bg-on-secondary py-4 mb-8">
         <div className="container mx-auto">
-          <ul className="beardcrumbs">
-            {beardcrumb.map(item => 
-              <li>{ item }</li>
-            )}
-          </ul>
+          <Beardcrumbs items={beardcrumb} />
           <div className="flex items-center max-h-min">
             <img className="h-full" src="/assets/images/language-logo/cpp.png" alt="lang logo" />
             <div>
@@ -33,19 +31,11 @@ export default function Material({ material }) {
         <div className="col-span-3">
           <aside className="p-4 bg-on-secondary rounded-xl">
             <div className="text-2xl font-bold mb-4">Course</div>
-            <ol>
-              {materialList.map(material =>
-                <li className="mb-2 flex gap-4">
-                  <span className="w-5 h-5 p-[2px] border border-primary inline-block rounded-full shrink-0">
-                    {material[1] && <div className="w-full h-full bg-primary rounded-full"></div>}
-                  </span>{material[0]}
-                </li>
-              )}
-            </ol>
+            <MaterialList materials={materialList} />
           </aside>
         </div>
         <article className="col-span-9">
-          <div className="prose !prose-invert max-w-none bg-on-secondary rounded-xl p-4 mb-8">
+          <div className="prose !prose-invert max-w-none bg-on-secondary rounded-xl p-4 mb-4">
             <h1>Create a Function</h1>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt officia sed natus ipsam nam, soluta dolorem atque quam nulla eveniet illum dicta. Excepturi sit soluta dolor officiis nulla amet quo!</p>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt officia sed natus ipsam nam, soluta dolorem atque quam nulla eveniet illum dicta. Excepturi sit soluta dolor officiis nulla amet quo!</p>
