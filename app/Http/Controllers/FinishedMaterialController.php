@@ -31,6 +31,9 @@ class FinishedMaterialController extends Controller
         foreach ($materials as $value ) {
             array_push($materialId,$value['id']);
         }
+        if ($user==null){
+            return array(count($materials),null);
+        }
         $finished= FinishedMaterial::whereIn('material_id', $materialId)->where('user_id', '=', $user['id'])->count()/count($materials)*100;
         return array(count($materials),$finished);
     }

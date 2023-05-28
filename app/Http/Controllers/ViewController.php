@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ViewController extends Controller {
-    public function home() {
+    public function front() {
         $courses = (new CourseController())->getAllCourses('',2);
         foreach ($courses as $value) {
             $value['students']=(new CourseTakenController())->getCourseStudents($value['id']);
             $finishedMaterial=(new FinishedMaterialController())->countFinishedmaterials($value['id']);
             $value['material']=$finishedMaterial[0];
             $value['progress']=$finishedMaterial[1];
-          }
+        }
+
         return Inertia::render('index', [
             'courses' => $courses,
         ]);
@@ -26,7 +27,7 @@ class ViewController extends Controller {
         foreach ($materials as $value) {
             $value['isFinished']=(new FinishedMaterialController())->checkFinishedMaterial($value['id']);
         }
-        return Inertia::render('course', [
+        return Inertia::render('Course', [
             'course' => array($course,'materials'=>$materials),
         ]);
     }
@@ -37,7 +38,7 @@ class ViewController extends Controller {
         if (count($material)!=0){
             (new FinishedMaterialController())->create($materialId);
         }
-        return Inertia::render('material', [
+        return Inertia::render('Material', [
             'material' => array($course,$material),
         ]);
     }
@@ -73,10 +74,10 @@ class ViewController extends Controller {
     {
         $response=(new UserController())->login($request);
         return response()->json([
-                    'isSuccess' => $response[0],
-                    'message' => $response[1],
-                    'token'=>$response[2]
-                ], 200);
+            'isSuccess' => $response[0],
+            'message' => $response[1],
+            'token'=>$response[2]
+        ], 200);
         // return Inertia::render('login',[
         //     'isSuccess'=>$response[0],
         //     'message'=>$response[1],
@@ -108,11 +109,20 @@ class ViewController extends Controller {
         ]);
     }
 
-    public function profile()
+    public function dashboard()
     {
         $user=(new UserController())->getUser();
+        $courses=(new CourseTakenController())->getCourseTaken();
+        foreach ($courses as $value) {
+            $value['students']=(new CourseTakenController())->getCourseStudents($value['id']);
+            $finishedMaterial=(new FinishedMaterialController())->countFinishedmaterials($value['id']);
+            $value['material']=$finishedMaterial[0];
+            $value['progress']=$finishedMaterial[1];
+        }
+
         return Inertia::render('index', [
-            'courses' => $user,
+            'user' => $user,
+            'courses' => $courses,
         ]);
     }
 
