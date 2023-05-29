@@ -16,7 +16,7 @@ const Card = ({ course }) => {
                 <i className="fa-regular fa-folder"></i>
                 <p>{course.material} materi</p>
             </div>
-            {course.progress && (
+            {course.progress != null && (
             <div className="progress w-full grid grid-cols-2 items-center gap-10">
                 <div className=" bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 w-[190%]">
                     <div className="bg-primary h-2.5 rounded-full" style={{width: `${course.progress}%`}}></div>

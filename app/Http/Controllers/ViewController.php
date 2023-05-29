@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 class ViewController extends Controller {
     public function front() {
-        $courses = (new CourseController())->getAllCourses('',2);
+        $courses = (new CourseController())->getAllCourses('',99);
         foreach ($courses as $value) {
             $value['students']=(new CourseTakenController())->getCourseStudents($value['id']);
             $finishedMaterial=(new FinishedMaterialController())->countFinishedmaterials($value['id']);
