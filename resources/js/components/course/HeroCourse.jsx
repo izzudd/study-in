@@ -5,7 +5,7 @@ const HeroCourse = () => {
             <main className="hero-content relative z-10 flex items-center justify-center container mx-auto px-12 gap-14 h-3/4">
                 <img src="/assets/images/language-logo/cpp.png" alt="" className="h-[400px]"/>
                 <div className="flex flex-col gap-10 pr-12 h-[400px]">
-                    <button className="btn self-end flex gap-4 items-center hover:btn-hover"><i className="fa-solid fa-bookmark"></i> Add to bookmark</button>
+                    <button className="btn self-end flex gap-4 items-center"><i className="fa-solid fa-bookmark"></i> Add to bookmark</button>
                     <h1 className="font-bold text-5xl">C++</h1>
                     <p className="text-2xl">C++ is a popular programming language.
                     C++ is used to create computer programs, and is one of the most used 

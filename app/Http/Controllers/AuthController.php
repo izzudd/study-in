@@ -12,12 +12,12 @@ class AuthController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ]);
- 
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(route('front'));
         }
- 
+
         return back()->withErrors([
             'username' => 'Incorrect username or password',
         ])->onlyInput('username');

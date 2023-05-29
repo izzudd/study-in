@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ViewController extends Controller {
     public function front() {
-        $courses = [];
-
-        for ($i=0; $i < 6; $i++) { 
-            $courses[] = [
-                'title' => "Course $i",
-                'slug' => "course-$i",
-                'description' => 'lorem ipsum dolor sir amet'
-            ];
+        $courses = (new CourseController())->getAllCourses('',99);
+        foreach ($courses as $value) {
+            $value['students']=(new CourseTakenController())->getCourseStudents($value['id']);
+            $finishedMaterial=(new FinishedMaterialController())->countFinishedmaterials($value['id']);
+            $value['material']=$finishedMaterial[0];
+            $value['progress']=$finishedMaterial[1];
         }
 
         return Inertia::render('Index', [
@@ -21,39 +20,78 @@ class ViewController extends Controller {
         ]);
     }
 
-    public function course(string $slug) {
-        $materials = [];
-
-        for ($i=0; $i < 10; $i++) { 
-            $materials[] = [
-                'title' => "Material $i",
-                'slug' => "material-$i",
-                'completed' => rand()&1 == 0,
-            ];
-        }
-
-        $course = [
-            'title' => $slug,
-            'slug' => $slug,
-            'description' => 'lorem ipsum dolor sir amet',
-            'materials' => $materials,
-        ];
+    public function course(string $id) {
+        $course = (new CourseController())->getCourseById($id);
+        $materials = (new MaterialController())->getMaterialsByCourseId($id);
+        foreach ($materials as $value)
+            $value['isFinished'] = (new FinishedMaterialController())->checkFinishedMaterial($value['id']);
+    
+        $course['progress']=(new FinishedMaterialController())->countFinishedmaterials($course['id'])[1];
+        $course['materials'] = $materials;
+        $course['taken'] = (new CourseTakenController())->checkIsTaken(auth()->user()->id, $id);
 
         return Inertia::render('Course', [
-            'course' => $course,
+            'course' => $course
         ]);
     }
 
-    public function material($course, $slug) {
-        $material = [
-            'title' => 'Material Title',
-            'slug' => 'material-title',
-            'content' => '<h2>sub title</h2><p>some paragraph</p>',
-            'completed' => false,
-        ];
+    public function material($id, $materialId) {
+        $material=(new MaterialController())->getMaterialById($materialId, $id);
+        
+        $course = (new CourseController())->getCourseById($id);
+        $course['progress']=(new FinishedMaterialController())->countFinishedmaterials($course['id'])[1];
+        $materials = (new MaterialController())->getMaterialsByCourseId($id);
+        foreach ($materials as $value) {
+            $value['isFinished']=(new FinishedMaterialController())->checkFinishedMaterial($value['id']);
+        }
+        $course['materials'] = $materials;
 
+        if (count($material)!=0){
+            (new FinishedMaterialController())->create($materialId);
+        }
         return Inertia::render('Material', [
-            'material' => $material,
+            'material' => $material[0],
+            'course' => $course
         ]);
+    }
+
+    public function search(string $key)
+    {
+        $courses = (new CourseController())->getAllCourses($key,2);
+        foreach ($courses as $value) {
+            $value['students']=(new CourseTakenController())->getCourseStudents($value['id']);
+            $finishedMaterial=(new FinishedMaterialController())->countFinishedmaterials($value['id']);
+            $value['material']=$finishedMaterial[0];
+            $value['progress']=$finishedMaterial[1];
+        }
+        return Inertia::render('index', [
+            'courses' => $courses,
+        ]);
+    }
+
+    public function dashboard()
+    {
+        $user=(new UserController())->getUser();
+        $courses=(new CourseTakenController())->getCourseTaken();
+        foreach ($courses as $value) {
+            $value['students']=(new CourseTakenController())->getCourseStudents($value['id']);
+            $finishedMaterial=(new FinishedMaterialController())->countFinishedmaterials($value['id']);
+            $value['material']=$finishedMaterial[0];
+            $value['progress']=$finishedMaterial[1];
+        }
+
+        return Inertia::render('Dashboard', [
+            'user' => $user,
+            'courses' => $courses,
+        ]);
+    }
+
+    public function updateUserData(Request $request)
+    {
+        $response=(new UserController())->updateData($request);
+        return response()->json([
+            'isSuccess' => $response[0],
+            'message' => $response[1],
+        ], 200);
     }
 }

@@ -13,7 +13,6 @@ createInertiaApp({
   setup({ el, App, props }) {
     createRoot(el).render(
       <div>
-        <button onClick={() => router.post('logout')}>logout</button>
         <App {...props} />
       </div>
     )

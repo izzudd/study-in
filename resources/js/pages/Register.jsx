@@ -42,13 +42,13 @@ export default function Register({ errors }) {
           />
         </div>
         <div className="username mt-3 btn-input">
-          <input type="text" className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required maxLength={8} placeholder='Username'
+          <input type="text" className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required minLength={4} placeholder='Username'
           value={data.username}
           onChange={e=>setData('username', e.target.value)}
           />
         </div>
         <div className="pass mt-3 btn-input">
-          <input type={seen === false? 'password':'text'} className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required maxLength={8} placeholder='Password'
+          <input type={seen === false? 'password':'text'} className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required minLength={8} placeholder='Password'
           value={data.password}
           onChange={e=>setData('password', e.target.value)}
           />
@@ -58,7 +58,7 @@ export default function Register({ errors }) {
           <input type="radio"/>
           <p>Keep me signed in</p>
         </div>
-        { errors.username && <div className="text-red-500">{ errors.username }</div>}
+        { errors.username && <div className="text-red-500"><i class="fa-solid fa-circle-exclamation"></i> { errors.username }</div>}
         <button className="btn w-[60%] justify-self-end">SIGN UP</button>
         <p className="">Already have an account? <Link className="font-bold" href="/login">Login</Link></p>
       </form>

@@ -5,20 +5,34 @@
 /* tailwind custom bundle style */
 @layer components {
   .btn-input {
-    @apply border border-on-primary px-4 rounded-lg py-[15px] duration-300 w-[100%];
+    @apply border border-on-primary px-4 rounded-lg py-[15px] duration-300 w-[100%] flex justify-between items-center;
   };
 
   .btn {
-      @apply bg-primary font-semibold px-4 py-[10px] rounded-lg text-on-primary
+      @apply bg-primary font-semibold px-4 py-[10px] rounded-lg text-on-primary hover:btn-hover active:btn-active duration-300
   };
 
   .btn-hover {
     @apply bg-prim-container font-semibold px-4 py-[10px] rounded-lg text-on-prim-container 
   }
 
+  .btn-active {
+    @apply bg-secondary-container text-on-secondary-container font-semibold px-4 py-[10px] rounded-lg
+  }
+
   .btn-primary {
-    @apply px-6 rounded-lg py-2 bg-on-primary font-semibold;
+    @apply px-6 rounded-lg py-2 bg-prim-container font-bold text-on-prim-container hover:btn-primary-hover active:btn-primary-active duration-300;
   };
+
+  .btn-primary-hover {
+    @apply px-6 rounded-lg py-2 bg-on-primary font-bold text-on-background;
+  }
+
+  .btn-primary-active {
+    @apply px-6 rounded-lg py-2 bg-secondary font-bold text-on-secondary;
+  }
+
+
 
   .beardcrumbs {
     @apply flex;

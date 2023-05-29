@@ -32,13 +32,13 @@ export default function Login({errors}) {
       <form onSubmit={submit} className="login-form bg-on-prim-container w-[30%] h-[80%] z-10 flex flex-col items-center gap-4 rounded-3xl py-[70px] px-[40px]">
         <h1 className="text-center text-2xl font-semibold border-b-4 border-on-primary w-[100%] pb-5">WELCOME BACK!</h1>
         <div className="username mt-12 btn-input">
-          <input type="text" className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required minLength={8} placeholder='Username'
+          <input type="text" className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required placeholder='Username'
           value={data.username}
           onChange={e=>setData('username', e.target.value)}
           />
         </div>
         <div className="pass mt-3 btn-input">
-          <input type={seen === false? 'password':'text'} className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required maxLength={8} placeholder='Password'
+          <input type={seen === false? 'password':'text'} className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required placeholder='Password'
           value={data.password}
           onChange={e=>setData('password', e.target.value)}
           />
