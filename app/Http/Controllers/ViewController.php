@@ -35,36 +35,37 @@ class ViewController extends Controller {
         ]);
     }
 
-    public function material($id, $materialId) {
-        $material=(new MaterialController())->getMaterialById($materialId, $id);
-        
-        $course = (new CourseController())->getCourseById($id);
-        $course['progress']=(new FinishedMaterialController())->countFinishedmaterials($course['id'])[1];
-        $materials = (new MaterialController())->getMaterialsByCourseId($id);
-        foreach ($materials as $value) {
-            $value['isFinished']=(new FinishedMaterialController())->checkFinishedMaterial($value['id']);
-        }
-        $course['materials'] = $materials;
-
+    public function material($courseId) {
+        $material=(new MaterialController())->getMaterialDetails($courseId,1);
+        $course=(new CourseController())->getCourseById($courseId);
         if (count($material)!=0){
-            (new FinishedMaterialController())->create($materialId);
+            (new FinishedMaterialController())->create($material[0]['id']);
         }
+        $course['materials'] = (new MaterialController())->getMaterialsByCourseId($courseId);
+        foreach ($course['materials'] as $value) {
+            $value['isFinished'] = (new FinishedMaterialController())->checkFinishedMaterial($value['id']);
+            unset($value['content']);
+        }
+        
         return Inertia::render('Material', [
+            'course' => $course,
+            'prev' => $material->previousPageUrl(),
+            'next' => $material->nextPageUrl(),
             'material' => $material[0],
-            'course' => $course
         ]);
     }
 
     public function search(string $key)
     {
-        $courses = (new CourseController())->getAllCourses($key,2);
+        $courses = (new CourseController())->getAllCourses($key,8);
         foreach ($courses as $value) {
             $value['students']=(new CourseTakenController())->getCourseStudents($value['id']);
             $finishedMaterial=(new FinishedMaterialController())->countFinishedmaterials($value['id']);
             $value['material']=$finishedMaterial[0];
             $value['progress']=$finishedMaterial[1];
         }
-        return Inertia::render('index', [
+        // return response()->json($courses, 200);
+        return Inertia::render('Index', [
             'courses' => $courses,
         ]);
     }
