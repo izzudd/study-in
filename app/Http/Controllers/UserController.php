@@ -123,7 +123,7 @@ class UserController extends Controller
 
         try {
             $user = User::create([
-                'name' => $request->name,
+                'full_name' => $request->name,
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
             ]);
