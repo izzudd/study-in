@@ -15,7 +15,7 @@ const DashCard = () => {
             )}
             <div className="w-[240px] bg-background rounded-3xl relative py-[26px] px-[28px]"> 
                 <img src="/assets/images/diamond.png" alt="" className="absolute top-0 left-0 z-0" />
-                <img src="/assets/images/Cplus.png" alt="" className="z-10 relative self-center" />
+                <img src="/assets/images/language-logo/cpp.png" alt="" className="z-10 relative self-center" />
             </div>
             <div className="word">
                 <p className="mt- text-3xl font-bold self-center">C++</p>

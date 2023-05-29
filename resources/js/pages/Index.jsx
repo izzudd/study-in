@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import { useState } from 'react';
 
 export default function Index({ courses }) {
-  const [login,setLogin] = useState(true);
+  const [login,setLogin] = useState(false);
   return (
     <div>
       <NavBar isLogin = {login} />

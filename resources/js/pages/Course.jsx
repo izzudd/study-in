@@ -1,6 +1,6 @@
 import Navbar from "../components/NavBar"
 import Footer from "../components/Footer"
-import HeroCourse from "../components/course/CourseHero"
+import HeroCourse from "../components/course/HeroCourse"
 import Progress from "../components/course/Progress"
 import ListCourse from "../components/course/ListCourse"
 

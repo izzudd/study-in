@@ -32,7 +32,7 @@ export default function Login({errors}) {
       <form onSubmit={submit} className="login-form bg-on-prim-container w-[30%] h-[80%] z-10 flex flex-col items-center gap-4 rounded-3xl py-[70px] px-[40px]">
         <h1 className="text-center text-2xl font-semibold border-b-4 border-on-primary w-[100%] pb-5">WELCOME BACK!</h1>
         <div className="username mt-12 btn-input">
-          <input type="text" className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required maxLength={8} placeholder='Username'
+          <input type="text" className='w-[90%] outline-none bg-on-prim-container text-on-primary placeholder-on-primary' required minLength={8} placeholder='Username'
           value={data.username}
           onChange={e=>setData('username', e.target.value)}
           />
@@ -44,11 +44,11 @@ export default function Login({errors}) {
           />
           <i onClick={()=>setSeen(!seen)} className= {`${seen===false?'fa-regular fa-eye-slash':'fa-regular fa-eye'} hover:cursor-pointer`}></i>
         </div>
-        <div className="keep flex gap-2 self-start items-center mt-4 mb-12">
+        <div className="keep flex gap-2 self-start items-center mt-4 mb-7">
           <input type="radio"/>
           <p>Keep me signed in</p>
         </div>
-        { errors.username && <div className="text-red-500">{ errors.username }</div>}
+        { errors.username && <div className="text-red-500"><i class="fa-solid fa-circle-exclamation"></i> { errors.username }</div>}
         <button className="btn w-[60%] justify-self-end">LOGIN</button>
         <p className="">Dont have an account? <Link href="/register" className="font-bold">Sign up</Link></p>
       </form>

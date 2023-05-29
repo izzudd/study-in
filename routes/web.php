@@ -26,8 +26,8 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/register', [UserController::class, 'store']);
 Route::inertia('/register', 'Register')->name('register')->name('register');
 
-Route::middleware(Authenticate::class)->group(function() {
+// Route::middleware(Authenticate::class)->group(function() {
   Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
   Route::get('/{slug}', [ViewController::class, 'course'])->name('course');
   Route::get('/{course}/{slug}', [ViewController::class, 'material'])->name('material');
-});
+// });
