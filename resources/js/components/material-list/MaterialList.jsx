@@ -20,8 +20,8 @@ import { Link } from "@inertiajs/react"
 export default function MaterialList({ materials, courseId }) {
   return (
     <ol>
-      {materials.map(material =>
-        <Link href={`/course/${courseId}/${material.id}`} key={material.id}>
+      {materials.map((material, i) =>
+        <Link href={`/material/${courseId}?page=${i+1}`} key={material.id}>
           <MaterialListItem title={material.title} done={material.isFinished} />
         </Link>
       )}

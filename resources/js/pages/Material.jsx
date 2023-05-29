@@ -4,7 +4,7 @@ import Beardcrumbs from "../components/Beardcrumbs";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
-export default function Material({ material, course }) {
+export default function Material({ material, course, next, prev }) {
   let materialList = [
     ['C++ Function', true],
     ['C++ Function Parameters', false],
@@ -14,7 +14,7 @@ export default function Material({ material, course }) {
 
   let beardcrumb = ['Home', 'C++', 'C++ Function'];
 
-  console.log(material, course);
+  console.log(material, course, next, prev);
 
   return (
     <div>
@@ -45,8 +45,9 @@ export default function Material({ material, course }) {
             <div dangerouslySetInnerHTML={{__html: material.content}} />
           </div>
           <nav className="bg-on-secondary rounded-xl p-4 flex justify-between">
-            <Link className="btn-primary"><i className="fa-solid fa-arrow-left mr-2"></i> HOME</Link>
-            <Link className="btn-primary">NEXT <i className="fa-solid fa-arrow-right ml-2"></i></Link>
+            {prev != null && <Link href={prev} className="btn-primary"><i className="fa-solid fa-arrow-left mr-2"></i> PREV</Link>}
+            <div></div>
+            {next != null && <Link href={next} className="btn-primary">NEXT <i className="fa-solid fa-arrow-right ml-2"></i></Link>}
           </nav>
         </article>
       </div>
