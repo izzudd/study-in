@@ -1,4 +1,5 @@
 import MaterialListItem from "./MaterialListItem"
+import { Link } from "@inertiajs/react"
 
 /**
  * @param {Object} props
@@ -16,11 +17,13 @@ import MaterialListItem from "./MaterialListItem"
  *   <MaterialList materials={materials}>
  * )
  */
-export default function MaterialList({ materials }) {
+export default function MaterialList({ materials, courseId }) {
   return (
     <ol>
       {materials.map(material =>
-        <MaterialListItem title={material.title} done={material.done} key={material.title} />
+        <Link href={`/course/${courseId}/${material.id}`} key={material.id}>
+          <MaterialListItem title={material.title} done={material.isFinished} />
+        </Link>
       )}
     </ol>
   )

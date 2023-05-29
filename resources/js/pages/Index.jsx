@@ -4,14 +4,15 @@ import Path from '../components/index/Path'
 import Footer from '../components/Footer'
 import { useState } from 'react';
 
-export default function Index({ courses }) {
+export default function Index({ courses, loggedin }) {
   const [login,setLogin] = useState(true);
+  
   return (
     <div>
-      <NavBar isLogin = {login} />
+      <NavBar isLogin = {loggedin} />
       <Hero/>
-      <Path/>
-      <Footer/>
+      <Path courses={courses.data} />
+      <Footer />
     </div>
   )
 }

@@ -4,7 +4,7 @@ import Beardcrumbs from "../components/Beardcrumbs";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
-export default function Material({ material }) {
+export default function Material({ material, course }) {
   let materialList = [
     ['C++ Function', true],
     ['C++ Function Parameters', false],
@@ -13,6 +13,8 @@ export default function Material({ material }) {
   ].map(material => ({title: material[0], done: material[1]}));
 
   let beardcrumb = ['Home', 'C++', 'C++ Function'];
+
+  console.log(material, course);
 
   return (
     <div>
@@ -23,8 +25,8 @@ export default function Material({ material }) {
           <div className="flex items-center max-h-min">
             <img className="h-full" src="/assets/images/language-logo/cpp.png" alt="lang logo" />
             <div>
-              <div className="text-5xl font-bold mb-4">C++</div>
-              <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam esse, hic recusandae consectetur id quidem laboriosam vel, voluptates ipsum dolores et animi, itaque officia sapiente dicta temporibus? Porro, ea ipsam.</div>
+              <div className="text-5xl font-bold mb-4">{course.title}</div>
+              <div>{course.description}</div>
             </div>
           </div>
         </div>
@@ -34,16 +36,13 @@ export default function Material({ material }) {
         <div className="col-span-3">
           <aside className="p-4 bg-on-secondary rounded-xl">
             <div className="text-2xl font-bold mb-4">Course</div>
-            <MaterialList materials={materialList} />
+            <MaterialList materials={course.materials} courseId={course.id} />
           </aside>
         </div>
         <article className="col-span-9">
           <div className="prose !prose-invert max-w-none bg-on-secondary rounded-xl p-4 mb-4">
-            <h1>Create a Function</h1>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt officia sed natus ipsam nam, soluta dolorem atque quam nulla eveniet illum dicta. Excepturi sit soluta dolor officiis nulla amet quo!</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt officia sed natus ipsam nam, soluta dolorem atque quam nulla eveniet illum dicta. Excepturi sit soluta dolor officiis nulla amet quo!</p>
-            <h2>This is Section One</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt officia sed natus ipsam nam, soluta dolorem atque quam nulla eveniet illum dicta. Excepturi sit soluta dolor officiis nulla amet quo!</p>
+            <h1>{material.title}</h1>
+            <div dangerouslySetInnerHTML={{__html: material.content}} />
           </div>
           <nav className="bg-on-secondary rounded-xl p-4 flex justify-between">
             <Link className="btn-primary"><i className="fa-solid fa-arrow-left mr-2"></i> HOME</Link>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseTakenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViewController;
 use App\Http\Middleware\Authenticate;
@@ -35,14 +36,17 @@ Route::inertia('/login', 'Login')->name('login');
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::post('/register', [UserController::class, 'store']);
-Route::inertia('/register', 'Register')->name('register')->name('register');
+Route::inertia('/register', 'Register')->name('register');
 
 Route::middleware(Authenticate::class)->group(function() {
-    Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
+    Route::get('/dashboard', [ViewController::class, 'dashboard'])->name('dashboard');
+
+    Route::post('/course/{id}', [CourseTakenController::class, 'addCourse']);
     Route::get('/course/{id}', [ViewController::class, 'course']);
-    Route::post('/course/{id}', [ViewController::class, 'addCourse']);
     Route::get('/course/{id}/{materialId}', [ViewController::class, 'material']);
+
     Route::get('/search/{key}', [ViewController::class, 'search']);
-    Route::get('/dashboard', [ViewController::class, 'dashboard']);
+
+    // Route::get('/dashboard', [ViewController::class, 'dashboard']);
     Route::post('/dashboard', [ViewController::class, 'updateUserData']);
 });
