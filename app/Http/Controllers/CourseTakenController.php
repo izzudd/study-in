@@ -10,7 +10,7 @@ class CourseTakenController extends Controller
     public function addCourse($request)
     {
         $user=(new UserController())->getUser();
-        if (self::checkIsTaken($user['id'],$request->input('id'))) {
+        if (!self::checkIsTaken($user['id'],$request->input('id'))) {
             CourseTaken::create([
                 'user_id'     => $user['id'],
                 'course_id'   => $request->input('id')
@@ -24,9 +24,9 @@ class CourseTakenController extends Controller
     {
         $courseTaken=CourseTaken::where('course_id', '=', $courseId)->where('user_id', '=', $userId)->count();
         if($courseTaken>0){
-            return false;
-        }else{
             return true;
+        }else{
+            return false;
         }
     }
 
@@ -39,7 +39,7 @@ class CourseTakenController extends Controller
     public function getCourseTaken()
     {
         $user=(new UserController())->getUser();
-        $courses=CourseTaken::join('courses', 'courses_taken.course_id', '=', 'courses.id')->where('courses_taken.user_id',$user['id'])->select('courses.*')->get();
+        $courses=CourseTaken::join('courses', 'courses_taken.course_id', '=', 'courses.id')->where('courses_taken.user_id',$user['id'])->select('courses.*')->paginate(8);
         return $courses;
     }
 }

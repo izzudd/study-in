@@ -15,7 +15,7 @@ class ViewController extends Controller {
             $value['progress']=$finishedMaterial[1];
         }
 
-        return Inertia::render('index', [
+        return Inertia::render('Index', [
             'courses' => $courses,
         ]);
     }
@@ -23,6 +23,8 @@ class ViewController extends Controller {
     public function course(string $id) {
         $course = (new CourseController())->getCourseById($id);
         $course['progress']=(new FinishedMaterialController())->countFinishedmaterials($course['id'])[1];
+        $user=(new UserController())->getUser();
+        $course['isTaken']=(new CourseTakenController())->checkIsTaken($user['id'],$course['id']);
         $materials = (new MaterialController())->getMaterialsByCourseId($id);
         foreach ($materials as $value) {
             $value['isFinished']=(new FinishedMaterialController())->checkFinishedMaterial($value['id']);
@@ -104,7 +106,7 @@ class ViewController extends Controller {
             $value['material']=$finishedMaterial[0];
             $value['progress']=$finishedMaterial[1];
         }
-        return Inertia::render('index', [
+        return Inertia::render('Index', [
             'courses' => $courses,
         ]);
     }
@@ -119,8 +121,8 @@ class ViewController extends Controller {
             $value['material']=$finishedMaterial[0];
             $value['progress']=$finishedMaterial[1];
         }
-
-        return Inertia::render('index', [
+        return response()->json(array($user,$courses));
+        return Inertia::render('Index', [
             'user' => $user,
             'courses' => $courses,
         ]);

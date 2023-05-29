@@ -15,12 +15,7 @@ createInertiaApp({
       <div>
         <button onClick={() => router.post('logout')}>logout</button>
         <App {...props} />
-<<<<<<< HEAD
-        
-      </Layout>
-=======
       </div>
->>>>>>> b7a9f0eee04f2b981b3e7197729617ad4762d0bd
     )
   },
 })
