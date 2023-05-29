@@ -50,4 +50,6 @@ Route::middleware(Authenticate::class)->group(function() {
     // Route::get('/dashboard', [ViewController::class, 'dashboard']);
     Route::post('/dashboard', [ViewController::class, 'updateUserData']);
     Route::get('/sertif/{courseId}', [ViewController::class, 'certificate']);
+
+    Route::post('/upload-photo', [ViewController::class, 'uploadPhoto']);
 });

@@ -107,4 +107,16 @@ class ViewController extends Controller {
             self::course($courseId);
         }
     }
+
+    public function uploadPhoto(Request $request)
+    {
+        $this->validate($request, [
+			'file' => 'required|mimes:jpeg,png,jpg',
+		]);
+		$file = $request->file('file');
+        $user=(new UserController())->getUser();
+        $tujuan_upload = 'C:\Users\yogip\CODING\Coding-Laravel\tugas-akhir-pemweb\public\assets\profile-photo';
+		$file->move($tujuan_upload,$user['id'].'.'.$file->getClientOriginalExtension());
+        self::dashboard();
+    }
 }
