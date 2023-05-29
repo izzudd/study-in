@@ -34,14 +34,15 @@ class ViewController extends Controller {
         ]);
     }
 
-    public function material($id, $materialId) {
-        $material=(new MaterialController())->getMaterialById($materialId,$id);
-        $course=(new CourseController())->getCourseById($id);
+    public function material($courseId) {
+        $material=(new MaterialController())->getMaterialDetails($courseId,1);
+        $course=(new CourseController())->getCourseById($courseId);
         if (count($material)!=0){
-            (new FinishedMaterialController())->create($materialId);
+            (new FinishedMaterialController())->create($material[0]['id']);
         }
         return Inertia::render('Material', [
-            'material' => array($course,$material),
+            'course' => $course,
+            'material' => $material,
         ]);
     }
 
@@ -99,13 +100,14 @@ class ViewController extends Controller {
 
     public function search(string $key)
     {
-        $courses = (new CourseController())->getAllCourses($key,2);
+        $courses = (new CourseController())->getAllCourses($key,8);
         foreach ($courses as $value) {
             $value['students']=(new CourseTakenController())->getCourseStudents($value['id']);
             $finishedMaterial=(new FinishedMaterialController())->countFinishedmaterials($value['id']);
             $value['material']=$finishedMaterial[0];
             $value['progress']=$finishedMaterial[1];
         }
+        // return response()->json($courses, 200);
         return Inertia::render('Index', [
             'courses' => $courses,
         ]);
@@ -121,7 +123,6 @@ class ViewController extends Controller {
             $value['material']=$finishedMaterial[0];
             $value['progress']=$finishedMaterial[1];
         }
-        return response()->json(array($user,$courses));
         return Inertia::render('Index', [
             'user' => $user,
             'courses' => $courses,

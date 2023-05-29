@@ -41,7 +41,7 @@ Route::middleware(Authenticate::class)->group(function() {
     Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
     Route::get('/course/{id}', [ViewController::class, 'course']);
     Route::post('/course/{id}', [ViewController::class, 'addCourse']);
-    Route::get('/course/{id}/{materialId}', [ViewController::class, 'material']);
+    Route::get('/material/{courseId}', [ViewController::class, 'material']);
     Route::get('/search/{key}', [ViewController::class, 'search']);
     Route::get('/dashboard', [ViewController::class, 'dashboard']);
     Route::post('/dashboard', [ViewController::class, 'updateUserData']);
