@@ -15,74 +15,10 @@ use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
-    public function signup($request)
-    {
-        $validator = Validator::make($request->all(), [
-            'username'     => 'required',
-            'fullName'    => 'required',
-            'password'   => 'required',
-        ],
-            [
-                'username.required' => 'Masukkan username',
-                'fullName.required' => 'Masukkan full name',
-                'password.required' => 'Masukkan password',
-            ]
-        );
-
-        if($validator->fails()) {
-            return array(false,"Silahkan Isi Data Yang Kosong");
-        } else {
-            try {
-                $user = User::create([
-                    'username'     => $request->input('username'),
-                    'full_name'     => $request->input('fullName'),
-                    'password'   => Hash::make($request->input('password'))
-                ]);
-                return array(true,"Registrasi Berhasil !!!");
-            } catch (\Illuminate\Database\QueryException $exception) {
-                return array(false,"Registrasi Gagal, Username telah digunakan");
-            }
-        }
-    }
-
-    public function login($request)
-    {
-        $validator = Validator::make($request->all(), [
-            'username'     => 'required',
-            'password'   => 'required',
-        ],
-            [
-                'username.required' => 'Masukkan username',
-                'password.required' => 'Masukkan password',
-            ]
-        );
-
-        if($validator->fails()) {
-            return array(false,"Silahkan Isi Data Yang Kosong",'');
-        }
-
-        $user = User::where('username', $request->username)->first();
-
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            // throw ValidationException::withMessages([
-            //     'username' => ['The provided credentials are incorrect.'],
-            // ]);
-            return array(false,"Username/password salah",'');
-        }
-
-        return array(true,"Login berhasil !!!","Bearer ".$user->createToken('Token')->plainTextToken);
-    }
-
     public function getUser()
     {
         $user = Auth::user();
-
         return $user;
-    }
-
-    public function logout($request)
-    {
-        $request->user()->currentAccessToken()->delete();
     }
 
     public function updateData($request)
@@ -123,13 +59,13 @@ class UserController extends Controller
 
         try {
             $user = User::create([
-                'name' => $request->name,
+                'full_name' => $request->name,
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
             ]);
         } catch(Exception $e) {
             return redirect()->back()->withErrors([
-                'username' => 'Username already taken'
+                'username' => 'Username already taken',
             ]);
         }
 

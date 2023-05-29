@@ -15,84 +15,44 @@ class ViewController extends Controller {
             $value['progress']=$finishedMaterial[1];
         }
 
-        return Inertia::render('index', [
+        return Inertia::render('Index', [
             'courses' => $courses,
         ]);
     }
 
     public function course(string $id) {
         $course = (new CourseController())->getCourseById($id);
+        $materials = (new MaterialController())->getMaterialsByCourseId($id);
+        foreach ($materials as $value)
+            $value['isFinished'] = (new FinishedMaterialController())->checkFinishedMaterial($value['id']);
+    
+        $course['progress']=(new FinishedMaterialController())->countFinishedmaterials($course['id'])[1];
+        $course['materials'] = $materials;
+        $course['taken'] = (new CourseTakenController())->checkIsTaken(auth()->user()->id, $id);
+
+        return Inertia::render('Course', [
+            'course' => $course
+        ]);
+    }
+
+    public function material($id, $materialId) {
+        $material=(new MaterialController())->getMaterialById($materialId, $id);
+        
+        $course = (new CourseController())->getCourseById($id);
         $course['progress']=(new FinishedMaterialController())->countFinishedmaterials($course['id'])[1];
         $materials = (new MaterialController())->getMaterialsByCourseId($id);
         foreach ($materials as $value) {
             $value['isFinished']=(new FinishedMaterialController())->checkFinishedMaterial($value['id']);
         }
-        return Inertia::render('Course', [
-            'course' => array($course,'materials'=>$materials),
-        ]);
-    }
+        $course['materials'] = $materials;
 
-    public function material($id, $materialId) {
-        $material=(new MaterialController())->getMaterialById($materialId,$id);
-        $course=(new CourseController())->getCourseById($id);
         if (count($material)!=0){
             (new FinishedMaterialController())->create($materialId);
         }
         return Inertia::render('Material', [
-            'material' => array($course,$material),
+            'material' => $material[0],
+            'course' => $course
         ]);
-    }
-
-    public function signupCreate()
-    {
-        return Inertia::render('signup',[
-
-            ]);
-    }
-
-    public function signupStore(Request $request)
-    {
-        $response=(new UserController())->signup($request);
-        return response()->json([
-                    'isSuccess' => $response[0],
-                    'message' => $response[1],
-                ], 200);
-        // return Inertia::render('signup',[
-        //     'isSuccess'=>$response[0],
-        //     'message'=>$response[1],
-        // ]);
-    }
-
-    public function loginCreate()
-    {
-        return Inertia::render('login',[
-
-        ]);
-    }
-
-    public function loginStore(Request $request)
-    {
-        $response=(new UserController())->login($request);
-        return response()->json([
-            'isSuccess' => $response[0],
-            'message' => $response[1],
-            'token'=>$response[2]
-        ], 200);
-        // return Inertia::render('login',[
-        //     'isSuccess'=>$response[0],
-        //     'message'=>$response[1],
-        // ]);
-    }
-
-    public function logout(Request $request)
-    {
-        (new UserController())->logout($request);
-        self::loginCreate();
-    }
-
-    public function addCourse(Request $request)
-    {
-        (new CourseTakenController())->addCourse($request);
     }
 
     public function search(string $key)
@@ -120,7 +80,7 @@ class ViewController extends Controller {
             $value['progress']=$finishedMaterial[1];
         }
 
-        return Inertia::render('index', [
+        return Inertia::render('Dashboard', [
             'user' => $user,
             'courses' => $courses,
         ]);
@@ -133,8 +93,5 @@ class ViewController extends Controller {
             'isSuccess' => $response[0],
             'message' => $response[1],
         ], 200);
-        // return Inertia::render('index', [
-        //     'courses' => $response,
-        // ]);
     }
 }
