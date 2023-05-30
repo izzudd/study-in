@@ -3,7 +3,7 @@ const Profile = ({user, profile, pass}) => {
     return (
         <div className="flex flex-col gap-2">
             <h1 className="font-bold text-4xl text-center">Welcome, {user.full_name}!</h1>
-            <p>Information about your profile and preferences in all StudyIn services.</p>
+            <p className="text-center">Information about your profile and preferences in all StudyIn services.</p>
             <div className="profile flex gap-4 mt-16 mb-12 items-center">
                 <i onClick={()=>setIsClicked(!isClicked)} className="fa-solid fa-circle-user text-9xl cursor-pointer"></i>
                 <div className="details flex flex-col gap-2">
