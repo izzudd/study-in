@@ -11,7 +11,7 @@
  */
 export default function Beardcrumbs({ items }) {
   return (
-    <ul className="beardcrumbs">
+    <ul className="beardcrumbs relative z-10 px-14">
       {items.map(item => 
         <li key={item}>{ item }</li>
       )}

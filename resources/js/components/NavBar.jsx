@@ -10,8 +10,8 @@ export default function course({ isLogin }) {
       <Link href="/"><img src="/assets/images/Logo.png" alt="" /></Link>
       {isLogin && 
       (<div className="nav text-on-background flex gap-6 items-center font-semibold">
-          <Link href="/"><p>Home</p></Link>
-          <Link href="/dashboard"><p>My Course</p></Link>
+          <Link href="/" className="hover-underline-animation"><p>Home</p></Link>
+          <Link href="/dashboard" className="hover-underline-animation"><p>My Course</p></Link>
           <div className="search-nav px-4 py-2 flex gap-3 border rounded-3xl h-[40px] w-[200px]">
             <input type="text" name="" id="" className="bg-on-primary border-primary outline-none w-[80%]" placeholder="Search" />
             <button><i className="fa-solid fa-magnifying-glass text-on-background"></i></button>

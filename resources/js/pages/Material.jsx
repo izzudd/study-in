@@ -20,7 +20,7 @@ export default function Material({ material, course, next, prev }) {
     <div>
       <NavBar isLogin={true} />
       <header className="bg-on-secondary py-4 mb-8">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-6">
           <Beardcrumbs items={beardcrumb} />
           <div className="flex items-center max-h-min">
             <img className="max-h-72 h-full" src="/assets/images/language-logo/cpp.png" alt="lang logo" />
@@ -32,7 +32,7 @@ export default function Material({ material, course, next, prev }) {
         </div>
       </header>
 
-      <div className="container mx-auto grid grid-cols-12 gap-4 mb-8">
+      <div className="container mx-auto grid grid-cols-12 gap-4 mb-8 px-6">
         <div className="col-span-3">
           <aside className="p-4 bg-on-secondary rounded-xl">
             <div className="text-2xl font-bold mb-4">Course</div>
