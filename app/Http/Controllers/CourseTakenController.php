@@ -35,7 +35,7 @@ class CourseTakenController extends Controller
     public function getCourseTaken()
     {
         $user=(new UserController())->getUser();
-        $courses=CourseTaken::join('courses', 'courses_taken.course_id', '=', 'courses.id')->where('courses_taken.user_id',$user['id'])->select('courses.*')->get();
+        $courses=CourseTaken::join('courses', 'courses_taken.course_id', '=', 'courses.id')->where('courses_taken.user_id',$user['id'])->select('courses.*')->paginate(8);
         return $courses;
     }
 }
