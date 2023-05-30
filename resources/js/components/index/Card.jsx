@@ -4,7 +4,7 @@ const Card = ({ course }) => {
     return (
         <Link 
             href={`/course/${course.id}`}
-            className="h-[444px] w-[240px] bg-background rounded-3xl shadow-xl relative flex flex-col items-start py-[26px] px-[28px] gap-5 hover:shadow-lg hover:shadow-prim-container duration-300"> 
+            className="h-[444px] w-[240px] bg-background rounded-3xl shadow-xl relative flex flex-col items-start py-[26px] px-[28px] gap-5 hover:shadow-lg hover:shadow-prim-container duration-300 active:shadow-secondary-container"> 
             <img src="/assets/images/diamond.png" alt="" className="absolute top-0 left-0 z-0" />
             <img src="/assets/images/language-logo/cpp.png" alt="" className="z-10 relative self-center" />
             <p className="w-full text-2xl font-bold self-center">{ course.title }</p>
