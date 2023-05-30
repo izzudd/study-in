@@ -80,7 +80,11 @@ class ViewController extends Controller {
             $value['material']=$finishedMaterial[0];
             $value['progress']=$finishedMaterial[1];
         }
-
+        if (file_exists( public_path() . '/assets/profile-photo/' . $user['id'] . '.png')) {
+            $user['photo']='/assets/profile-photo/' . $user['id'] . '.png';
+        } else {
+            $user['photo']='/assets/profile-photo/profile-picture.png';
+        }
         return Inertia::render('Dashboard', [
             'user' => $user,
             'courses' => $courses,
@@ -115,8 +119,8 @@ class ViewController extends Controller {
 		]);
 		$file = $request->file('file');
         $user=(new UserController())->getUser();
-        $tujuan_upload = 'C:\Users\yogip\CODING\Coding-Laravel\tugas-akhir-pemweb\public\assets\profile-photo';
-		$file->move($tujuan_upload,$user['id'].'.'.$file->getClientOriginalExtension());
+        $tujuan_upload = public_path() .'\assets\profile-photo';
+		$file->move($tujuan_upload,$user['id'].'.png');
         self::dashboard();
     }
 }
