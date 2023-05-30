@@ -18,12 +18,12 @@ export default function Material({ material, course, next, prev }) {
 
   return (
     <div>
-      <NavBar login={true} />
+      <NavBar isLogin={true} />
       <header className="bg-on-secondary py-4 mb-8">
         <div className="container mx-auto">
           <Beardcrumbs items={beardcrumb} />
           <div className="flex items-center max-h-min">
-            <img className="h-full" src="/assets/images/language-logo/cpp.png" alt="lang logo" />
+            <img className="max-h-72 h-full" src="/assets/images/language-logo/cpp.png" alt="lang logo" />
             <div>
               <div className="text-5xl font-bold mb-4">{course.title}</div>
               <div>{course.description}</div>
@@ -40,7 +40,7 @@ export default function Material({ material, course, next, prev }) {
           </aside>
         </div>
         <article className="col-span-9">
-          <div className="prose !prose-invert max-w-none bg-on-secondary rounded-xl p-4 mb-4">
+          <div className="prose !prose-invert max-w-none bg-on-secondary rounded-xl p-6 mb-4">
             <h1>{material.title}</h1>
             <div dangerouslySetInnerHTML={{__html: material.content}} />
           </div>

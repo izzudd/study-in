@@ -21,7 +21,7 @@ const Dashboard = ({user, courses}) => {
                 <Profile user={user} profile={profileHandler} pass={passHandler}/>
                 <p className="text-xl border-b-2 pb-5 border-prim-container">Course overview</p>
                 <div className="card-container flex flex-col gap-10">
-                    {courses.map(course => <DashCard key={course.id} course={course}/>)}
+                    {courses.data.map(course => <DashCard key={course.id} course={course}/>)}
                 </div>
             </main>
             <Footer/>
