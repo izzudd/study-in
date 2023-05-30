@@ -25,7 +25,7 @@ class ViewController extends Controller {
         $materials = (new MaterialController())->getMaterialsByCourseId($id);
         foreach ($materials as $value)
             $value['isFinished'] = (new FinishedMaterialController())->checkFinishedMaterial($value['id']);
-    
+
         $course['progress']=(new FinishedMaterialController())->countFinishedmaterials($course['id'])[1];
         $course['materials'] = $materials;
         $course['taken'] = (new CourseTakenController())->checkIsTaken(auth()->user()->id, $id);
@@ -46,7 +46,7 @@ class ViewController extends Controller {
             $value['isFinished'] = (new FinishedMaterialController())->checkFinishedMaterial($value['id']);
             unset($value['content']);
         }
-        
+
         return Inertia::render('Material', [
             'course' => $course,
             'prev' => $material->previousPageUrl(),
@@ -80,7 +80,11 @@ class ViewController extends Controller {
             $value['material']=$finishedMaterial[0];
             $value['progress']=$finishedMaterial[1];
         }
-
+        if (file_exists( public_path() . '/assets/profile-photo/' . $user['id'] . '.png')) {
+            $user['photo']='/assets/profile-photo/' . $user['id'] . '.png';
+        } else {
+            $user['photo']='/assets/profile-photo/profile-picture.png';
+        }
         return Inertia::render('Dashboard', [
             'user' => $user,
             'courses' => $courses,
@@ -94,5 +98,29 @@ class ViewController extends Controller {
             'isSuccess' => $response[0],
             'message' => $response[1],
         ], 200);
+    }
+
+    public function certificate($courseId)
+    {
+        $course = (new CourseController())->getCourseById($courseId);
+        if((new FinishedMaterialController())->countFinishedmaterials($course['id'])[1]==100){
+            $user=(new UserController())->getUser();
+            // return here
+            return response()->json(array($course,$user), 200);
+        }else{
+            self::course($courseId);
+        }
+    }
+
+    public function uploadPhoto(Request $request)
+    {
+        $this->validate($request, [
+			'file' => 'required|mimes:jpeg,png,jpg',
+		]);
+		$file = $request->file('file');
+        $user=(new UserController())->getUser();
+        $tujuan_upload = public_path() .'\assets\profile-photo';
+		$file->move($tujuan_upload,$user['id'].'.png');
+        self::dashboard();
     }
 }

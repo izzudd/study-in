@@ -43,10 +43,13 @@ Route::middleware(Authenticate::class)->group(function() {
 
     Route::post('/course/{id}', [CourseTakenController::class, 'addCourse']);
     Route::get('/course/{id}', [ViewController::class, 'course']);
-    
+
     Route::get('/material/{courseId}', [ViewController::class, 'material']);
     Route::get('/search/{key}', [ViewController::class, 'search']);
 
     // Route::get('/dashboard', [ViewController::class, 'dashboard']);
     Route::post('/dashboard', [ViewController::class, 'updateUserData']);
+    Route::get('/sertif/{courseId}', [ViewController::class, 'certificate']);
+
+    Route::post('/upload-photo', [ViewController::class, 'uploadPhoto']);
 });
