@@ -1,4 +1,5 @@
-const Progress = ({ progress }) => {
+const Progress = ({ progress, handler }) => {
+
     return (
         <div className="bg-background text-on-background py-10 px-24 gap-6 flex flex-col">
             <h1 className="text-4xl font-bold">Progres & Sertifikat</h1>
@@ -12,7 +13,7 @@ const Progress = ({ progress }) => {
                 <p className="w-fit justify-self-end">{progress}%</p>
             </div>
             )}
-           <button className={`btn self-start ${progress < 100? 'opacity-40' : 'opacity-100'}`}>Download Sertifikat</button>
+           <button className={`btn self-start ${progress < 100? 'opacity-40 ' : 'opacity-100'}`} onClick={handler}>Download Sertifikat</button>
         </div>
     );
 }
