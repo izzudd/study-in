@@ -6,7 +6,7 @@ import ListCourse from "../components/course/ListCourse"
 import Sertif from "../components/modal/Sertif"
 import { useState } from "react";
 
-export default function Course({ course, loggedin }) {
+export default function Course({ user, course, loggedin }) {
   const [courseCompleted, setCourseCompleted] = useState(false);
   const sertifHandler = ()=> setCourseCompleted(!courseCompleted)
   console.log(course);
@@ -17,7 +17,7 @@ export default function Course({ course, loggedin }) {
       <Progress progress={course.progress} handler={sertifHandler}/>
       <ListCourse materials={course.materials} courseId={course.id}/>
       <Footer/>
-      {courseCompleted && <Sertif handler={sertifHandler}/>}
+      {courseCompleted && <Sertif handler={sertifHandler} user={user} course={course}/>}
     </div>
   )
 }
