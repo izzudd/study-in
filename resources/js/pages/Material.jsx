@@ -4,7 +4,7 @@ import Beardcrumbs from "../components/Beardcrumbs";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
-export default function Material({ material, course, next, prev }) {
+export default function Material({ material, course, next, prev, loggedin }) {
   let materialList = [
     ['C++ Function', true],
     ['C++ Function Parameters', false],
@@ -18,7 +18,7 @@ export default function Material({ material, course, next, prev }) {
 
   return (
     <div>
-      <NavBar isLogin={true} />
+      <NavBar isLogin={loggedin} />
       <header className="bg-on-secondary py-4 mb-8">
         <div className="container mx-auto px-6">
           <Beardcrumbs items={beardcrumb} />

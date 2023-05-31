@@ -6,13 +6,13 @@ import ListCourse from "../components/course/ListCourse"
 import Sertif from "../components/modal/Sertif"
 import { useState } from "react";
 
-export default function Course({ course }) {
+export default function Course({ course, loggedin }) {
   const [courseCompleted, setCourseCompleted] = useState(false);
   const sertifHandler = ()=> setCourseCompleted(!courseCompleted)
   console.log(course);
   return (
     <div className="bg-background text-on-background">
-      <Navbar isLogin={true}/>
+      <Navbar isLogin={loggedin}/>
       <HeroCourse id={course.id} title={course.title} desciption={course.description} taken={course.taken}/>  
       <Progress progress={course.progress} handler={sertifHandler}/>
       <ListCourse materials={course.materials} courseId={course.id}/>
