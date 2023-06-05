@@ -51,4 +51,5 @@ Route::middleware(Authenticate::class)->group(function() {
     Route::get('/sertif/{courseId}', [ViewController::class, 'certificate']);
 
     Route::post('/upload-photo', [ViewController::class, 'uploadPhoto']);
+    Route::post('/change-password', [UserController::class, 'updatePassword']);
 });

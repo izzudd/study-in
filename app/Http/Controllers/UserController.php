@@ -13,39 +13,38 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
-class UserController extends Controller
-{
-    public function getUser()
-    {
+class UserController extends Controller {
+    public function getUser() {
         $user = Auth::user();
         return $user;
     }
 
-    public function updateData($request)
-    {
-        $validator = Validator::make($request->all(), [
-            'username'     => 'required',
-            'fullName'    => 'required',
-        ],
+    public function updateData($request) {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'username'     => 'required',
+                'fullName'    => 'required',
+            ],
             [
                 'username.required' => 'Masukkan username',
                 'fullName.required' => 'Masukkan full name',
             ]
         );
 
-        $user=self::getUser();
-        if($validator->fails()) {
-            return array(false,"Silahkan Isi Data Yang Kosong");
+        $user = self::getUser();
+        if ($validator->fails()) {
+            return array(false, "Silahkan Isi Data Yang Kosong");
         } else {
             try {
-                $user = User::where('id',$user['id'])->update([
+                $user = User::where('id', $user['id'])->update([
                     'username'     => $request->input('username'),
                     'full_name'     => $request->input('fullName')
                 ]);
 
-                return array(true,"Update data user Berhasil !!!");
+                return array(true, "Update data user Berhasil !!!");
             } catch (\Illuminate\Database\QueryException $exception) {
-                return array(false,"Update data user Gagal, Username telah digunakan");
+                return array(false, "Update data user Gagal, Username telah digunakan");
             }
         }
     }
@@ -63,7 +62,7 @@ class UserController extends Controller
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
             ]);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return redirect()->back()->withErrors([
                 'username' => 'Username already taken',
             ]);
@@ -72,5 +71,29 @@ class UserController extends Controller
         event(new Registered($user));
         Auth::login($user);
         return redirect('/');
+    }
+
+    function updatePassword(Request $request) {
+        error_log('start');
+        $id = auth()->user()->id;
+        $user = User::findOrFail($id);
+        error_log($user);
+
+        $this->validate($request, [
+            'old_password' => 'required',
+            'new_password' => 'different:password',
+        ]);
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->withErrors([
+                'password' => 'Password yang dimasukkan tidak sama'
+            ]);
+        }
+
+        $user->fill([
+            'password' => Hash::make($request->new_password)
+        ])->save();
+
+        return back();
     }
 }
