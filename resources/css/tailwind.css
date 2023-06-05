@@ -8,16 +8,20 @@
     @apply border border-on-primary px-4 rounded-lg py-[15px] duration-300 w-[100%] flex justify-between items-center;
   };
 
+  .btn-disabled {
+    @apply bg-secondary-container text-on-secondary-container
+  }
+
   .btn {
-      @apply bg-primary font-semibold px-4 py-[10px] rounded-lg text-on-primary hover:btn-hover active:btn-active duration-300
+      @apply bg-primary font-semibold px-4 py-[10px] rounded-lg text-on-primary hover:btn-hover active:btn-active disabled:btn-disabled duration-300
   };
 
   .btn-hover {
-    @apply bg-prim-container font-semibold px-4 py-[10px] rounded-lg text-on-prim-container 
+    @apply bg-prim-container text-on-prim-container 
   }
 
   .btn-active {
-    @apply bg-secondary-container text-on-secondary-container font-semibold px-4 py-[10px] rounded-lg
+    @apply bg-secondary-container text-on-secondary-container
   }
 
   .btn-primary {
@@ -25,11 +29,11 @@
   };
 
   .btn-primary-hover {
-    @apply px-6 rounded-lg py-2 bg-on-primary font-bold text-on-background;
+    @apply bg-on-primary text-on-background;
   }
 
   .btn-primary-active {
-    @apply px-6 rounded-lg py-2 bg-secondary font-bold text-on-secondary;
+    @apply bg-secondary text-on-secondary;
   }
 
 
