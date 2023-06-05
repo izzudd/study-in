@@ -8,11 +8,12 @@ import ChangePassword from "../components/modal/ChangePassword";
 
 
 const Dashboard = ({user, courses}) => {
-    console.log(user, courses);
     const[profileChanged,setProfileChanged] = useState(false);
     const[passwordChanged,setPasswordChanged] = useState(false);
     const profileHandler = ()=>setProfileChanged(!profileChanged)
     const passHandler = ()=>setPasswordChanged(!passwordChanged)
+
+    console.log(user);
 
     return (
         <div className="bg-background flex flex-col">
@@ -25,7 +26,7 @@ const Dashboard = ({user, courses}) => {
                 </div>
             </main>
             <Footer/>
-            {profileChanged && <ChangeProfile handler={profileHandler}/>}
+            {profileChanged && <ChangeProfile handler={profileHandler} userData={user}/>}
             {passwordChanged && <ChangePassword handler={passHandler}/>}
         </div>
     );

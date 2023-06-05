@@ -93,21 +93,28 @@ class ViewController extends Controller {
 
     public function updateUserData(Request $request)
     {
-        $response=(new UserController())->updateData($request);
-        return response()->json([
-            'isSuccess' => $response[0],
-            'message' => $response[1],
-        ], 200);
+        (new UserController())->updateData($request);
+
+        $request->validate([
+            'photo' => 'required|mimes:jpeg,png,jpg',
+        ]);
+        $file = $request->file('photo');
+        $user=(new UserController())->getUser();
+        $upload_destination = public_path() . '/assets/profile-photo';
+        $file->move($upload_destination, $user['id'].'.png');
+        error_log($request->file('photo'));
+
+        return redirect()->back();
     }
 
     public function certificate($courseId)
     {
         $course = (new CourseController())->getCourseById($courseId);
-        if((new FinishedMaterialController())->countFinishedmaterials($course['id'])[1]==100){
+        if((new FinishedMaterialController())->countFinishedmaterials($course['id'])[1]==100) {
             $user=(new UserController())->getUser();
             // return here
             return response()->json(array($course,$user), 200);
-        }else{
+        } else {
             self::course($courseId);
         }
     }

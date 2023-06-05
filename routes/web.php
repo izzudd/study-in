@@ -47,7 +47,6 @@ Route::middleware(Authenticate::class)->group(function() {
     Route::get('/material/{courseId}', [ViewController::class, 'material']);
     Route::get('/search/{key}', [ViewController::class, 'search']);
 
-    // Route::get('/dashboard', [ViewController::class, 'dashboard']);
     Route::post('/dashboard', [ViewController::class, 'updateUserData']);
     Route::get('/sertif/{courseId}', [ViewController::class, 'certificate']);
 
