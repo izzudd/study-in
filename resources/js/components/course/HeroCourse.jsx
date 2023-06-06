@@ -2,7 +2,7 @@ import { useForm } from "@inertiajs/react";
 import Beardcrumbs from "../Beardcrumbs";
 
 const HeroCourse = ({title, desciption, id, taken}) => {
-    const { data, setData, post, reset } = useForm({
+    const { post } = useForm({
         id: id
     });
 

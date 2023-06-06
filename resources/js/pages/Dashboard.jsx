@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/NavBar"
 import Footer from "../components/Footer"
 import DashCard from "../components/dashboard/DashCard";
@@ -7,17 +7,21 @@ import ChangeProfile from "../components/modal/ChangeProfile";
 import ChangePassword from "../components/modal/ChangePassword";
 
 
-const Dashboard = ({user, courses,loggedin}) => {
+const Dashboard = ({user, courses, loggedin}) => {
     const[profileChanged,setProfileChanged] = useState(false);
     const[passwordChanged,setPasswordChanged] = useState(false);
     const[filteredCourse, setFilteredCourse] = useState(courses.data);
     const profileHandler = ()=>setProfileChanged(!profileChanged)
     const passHandler = ()=>setPasswordChanged(!passwordChanged)
 
-    const filterCourse = (title)=> {
+    const filterCourse = (title) => {
         const filter = courses.data.filter(course => course.title == title)
         setFilteredCourse(title == ''? courses.data : filter);
     }
+
+    useEffect(() => {
+        setFilteredCourse(courses.data);
+    }, [courses]);
 
     return (
         <div className="bg-background flex flex-col">

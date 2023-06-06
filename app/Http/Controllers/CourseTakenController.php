@@ -18,6 +18,7 @@ class CourseTakenController extends Controller
         }else{
             CourseTaken::where('course_id', '=', $request->input('id'))->where('user_id', '=', $user['id'])->delete();
         }
+        return redirect()->back();
     }
 
     public function checkIsTaken($userId,$courseId)

@@ -8,7 +8,7 @@ const DashCard = ({course}) => {
         id: course.id
     });
 
-    const removeCourse = () => post(`/course/${id}`);
+    const removeCourse = () => post(`/course/${course.id}`);
 
     return (
         <div className="w-[816px] shadow-lg shadow-on-secondary relative rounded-3xl">
