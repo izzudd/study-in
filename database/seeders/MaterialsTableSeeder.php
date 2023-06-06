@@ -19,10 +19,37 @@ class MaterialsTableSeeder extends Seeder
             for ($j=0; $j < 8 ; $j++) {
                 Material::create([
                     'title'=>$faker->sentence,
-                    'content'=>$faker->paragraph,
+                    'content'=>$this->generateContent($faker),
                     'course_id'=>$i,
                 ]);
             }
         }
+    }
+
+    private function generateContent(\Faker\generator $faker): string {
+        $content = "";
+
+        $paragraphs = $faker->paragraphs(rand(4, 8));
+        $listItems = $faker->sentences(rand(4, 8));
+        
+        foreach ($paragraphs as $para) {
+            $content .= "<p>{$para}</p>";
+        }
+
+        $content .= "<h2>{$faker->sentence}</h2>";
+
+        $content .= "<ul>";
+        foreach ($listItems as $item) {
+            $content .= "<li>{$item}</li>";
+        }
+        $content .= "</ul>";
+
+        $content .= "<h2>{$faker->sentence}</h2>";
+        
+        foreach ($paragraphs as $para) {
+            $content .= "<p>{$para}</p>";
+        }
+
+        return $content;
     }
 }

@@ -17,7 +17,7 @@ class CoursesTableSeeder extends Seeder
         $faker = faker::create('id_ID');
         for ($i=1; $i < 20; $i++) {
             Course::create([
-                'title'=>$faker->sentence, 'description'=>$faker->paragraph
+                'title'=>$faker->sentence(2), 'description'=>$faker->paragraph
             ]);
         }
     }
