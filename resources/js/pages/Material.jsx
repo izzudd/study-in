@@ -12,9 +12,11 @@ export default function Material({ material, course, next, prev, loggedin }) {
     ['C++ Function Recursion', false]
   ].map(material => ({title: material[0], done: material[1]}));
 
-  let beardcrumb = ['Home', 'C++', 'C++ Function'];
-
-  console.log(material, course, next, prev);
+  let beardcrumb = [
+    {title: 'Home', link: '/'}, 
+    {title: course.title, link: `/course/${course.id}`}, 
+    material.title
+  ];
 
   return (
     <div>

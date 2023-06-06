@@ -6,7 +6,10 @@ const HeroCourse = ({title, desciption, id, taken}) => {
         id: id
     });
 
-    let beardcrumb = ['Home', 'C++'];
+    let beardcrumb = [
+        {title: 'Home', link: '/'}, 
+        {title, link: `/course/${id}`}
+    ];
 
     return (
         <div className="py-3 bg-background relative h-[90vh] text-on-background">

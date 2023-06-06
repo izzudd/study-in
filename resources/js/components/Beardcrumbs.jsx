@@ -1,19 +1,12 @@
-/**
- * @param {Object} props
- * @param {string[]} props.items
- * 
- * @component
- * @example
- * const items = ['home', 'course', 'material']
- * return (
- *   <Beardcrumbs items={items}>
- * )
- */
+import { Link } from "@inertiajs/react"
+
 export default function Beardcrumbs({ items }) {
   return (
     <ul className="beardcrumbs relative z-10 px-14">
       {items.map(item => 
-        <li key={item}>{ item }</li>
+        <li key={item}>
+          {typeof item === 'object' ? <Link href={item.link}>{ item.title }</Link> : item }
+        </li>
       )}
     </ul>
   )
