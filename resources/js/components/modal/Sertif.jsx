@@ -7,7 +7,7 @@ const Sertif = ({user, handler, course}) => {
                 <p className="absolute top-[58%] right-[50%] translate-x-1/2 text-[1.4vw] font-bold text-prim-container">{course.title.toUpperCase()}</p>
                 <i className="fa-solid fa-x cursor-pointer" onClick={handler}></i>
                 <img src="/assets/images/sertif.png" className="bg-red-500 h-[50%] self-center" alt="" height={600}/>
-                <button className="btn">Download Sertifikat</button>
+                <button className="btn invisible">Download Sertifikat</button>
             </div>
         </div>
     );
