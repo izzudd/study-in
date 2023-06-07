@@ -1,10 +1,9 @@
 import MaterialList from '../material-list/MaterialList'
 import { Link } from '@inertiajs/react';
 
-const ListCourse = ({ materials, courseId }) => {
-    console.log(materials)
+const ListCourse = ({ materials, title, description, courseId }) => {
     let isFinish = materials.map(material=> material.isFinished);
-    console.log(isFinish)
+    
     return (
         <div className="mx-24 mt-2 mb-16">
             {/* <MaterialList materials={materials} courseId={courseId} /> */}
@@ -14,8 +13,8 @@ const ListCourse = ({ materials, courseId }) => {
                 <p>Completed</p>
                 <i class="fa-solid fa-check"></i>
             </div>)}
-                <h1 className="text-3xl font-bold mb-6">C++ Function</h1>
-                <p>A function is a block of code which only runs when it is called. You can pass data, known as parameters, into a function. Functions are used to perform certain actions, and they are important for reusing code: Define the code once, and use it many times.</p>
+                <h1 className="text-3xl font-bold mb-6">{title}</h1>
+                <p>{description}</p>
             </div>
             <hr />
             <div className="p-6 border border-primary flex justify-end">

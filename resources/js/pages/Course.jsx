@@ -13,9 +13,9 @@ export default function Course({ user, course, loggedin }) {
   return (
     <div className="bg-background text-on-background">
       <Navbar isLogin={loggedin}/>
-      <HeroCourse id={course.id} title={course.title} desciption={course.description} taken={course.taken}/>  
+      <HeroCourse id={course.id} title={course.title} description={course.description} taken={course.taken} image={course.image}/>
       <Progress progress={course.progress} handler={sertifHandler}/>
-      <ListCourse materials={course.materials} courseId={course.id}/>
+      <ListCourse title={course.title} description={course.description} materials={course.materials} courseId={course.id}/>
       <Footer/>
       {courseCompleted && <Sertif handler={sertifHandler} user={user} course={course}/>}
     </div>

@@ -5,13 +5,6 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
 export default function Material({ material, course, next, prev, loggedin }) {
-  let materialList = [
-    ['C++ Function', true],
-    ['C++ Function Parameters', false],
-    ['C++ Function Overloading', true],
-    ['C++ Function Recursion', false]
-  ].map(material => ({title: material[0], done: material[1]}));
-
   let beardcrumb = [
     {title: 'Home', link: '/'}, 
     {title: course.title, link: `/course/${course.id}`}, 
@@ -25,7 +18,7 @@ export default function Material({ material, course, next, prev, loggedin }) {
         <div className="container mx-auto px-6">
           <Beardcrumbs items={beardcrumb} />
           <div className="flex items-center max-h-min">
-            <img className="max-h-72 h-full" src="/assets/images/language-logo/cpp.png" alt="lang logo" />
+            <img className="max-h-72 h-full" src={course.image} alt="lang logo" />
             <div>
               <div className="text-5xl font-bold mb-4">{course.title}</div>
               <div>{course.description}</div>

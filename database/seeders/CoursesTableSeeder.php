@@ -14,10 +14,13 @@ class CoursesTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $images = ['cpp.png', 'bootstrap.png', 'css.png', 'javascript.png', 'cpp.png', 'html.png', 'python.png', 'vuejs.png', 'laravel.png'];
         $faker = faker::create('id_ID');
         for ($i=1; $i < 20; $i++) {
             Course::create([
-                'title'=>$faker->sentence(2), 'description'=>$faker->paragraph
+                'title' => $faker->sentence(2), 
+                'description' => $faker->paragraph,
+                'image' => '/assets/images/language-logo/' . $images[array_rand($images)],
             ]);
         }
     }

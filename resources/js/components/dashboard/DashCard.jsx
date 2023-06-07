@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useForm, Link } from "@inertiajs/react";
 
 const DashCard = ({course}) => {
-    const [change,setChange] = useState(false);
-
     const { post } = useForm({
         id: course.id
     });
@@ -18,7 +16,7 @@ const DashCard = ({course}) => {
             <Link href={`/course/${course.id}`} className="flex gap-10 items-center">
                 <div className="w-[240px] bg-background rounded-3xl relative py-[26px] px-[28px]"> 
                     <img src="/assets/images/diamond.png" alt="" className="absolute top-0 left-0 z-0" />
-                    <img src="/assets/images/language-logo/cpp.png" alt="" className="z-10 relative self-center" />
+                    <img src={course.image} alt="" className="z-10 relative self-center" />
                 </div>
                 <div className="word flex-1 flex flex-col items-start justify-center gap-2 pr-8">
                     <p className="text-3xl font-bold">{course.title}</p>
